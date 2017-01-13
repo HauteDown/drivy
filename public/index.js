@@ -43,6 +43,15 @@ if(diffDays>=1 && diffDays<4)
     {
       rentals[i].price= newPrice-newPrice/2;
     }
+
+    var commission=rentals[i].price*0.3;
+var insu = commission/2;
+var assi = diffDays;
+var dri = commission- (insu+assi);
+
+rentals[i].drivy=dri;
+rentals[i].insurance = insu;
+rentals[i].assistance=assi;
   }
 //list of rentals
 //useful for ALL exercises
