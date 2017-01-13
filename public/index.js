@@ -37,7 +37,7 @@ if(diffDays>=1 && diffDays<4)
 
   if(diffDays>=4 && diffDays<10)
     {
-      rentals[i].price= newPrice-newPrice*0.33;
+      rentals[i].price= newPrice-newPrice*0.3;
     }
   if(diffDays>=10)
     {
