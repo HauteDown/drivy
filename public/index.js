@@ -23,7 +23,7 @@ for(var i = 0; i < rentals.length; i++){
 var returnDate2 = new Date(rentals[i].returnDate);
     var pickupDate2 = new Date(rentals[i].pickupDate);
     var timeDiff = Math.abs(returnDate2.getTime() - pickupDate2.getTime());
-    var diffDays = Math.ceil(timeDiff /(1000*3600*24));
+    var diffDays = Math.ceil(timeDiff /(1000*3600*24)+1);
 
 var distance = cars[i].pricePerKm*rentals[i].distance;
 var time = cars[i].pricePerDay*diffDays;
