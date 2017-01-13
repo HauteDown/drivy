@@ -29,7 +29,21 @@ var distance = cars[i].pricePerKm*rentals[i].distance;
 var time = cars[i].pricePerDay*diffDays;
 rentals[i].price = time + distance;
 }
-}
+
+if(diffDays>=1 && diffDays<4)
+    {
+      rentals[i].price= newPrice-newPrice*0.1;
+    }
+
+  if(diffDays>=4 && diffDays<10)
+    {
+      rentals[i].price= newPrice-newPrice*0.33;
+    }
+  if(diffDays>=10)
+    {
+      rentals[i].price= newPrice-newPrice/2;
+    }
+  }
 //list of rentals
 //useful for ALL exercises
 //The `price` is updated from exercice 1
