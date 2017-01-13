@@ -17,6 +17,19 @@ var cars = [{
   'pricePerKm': 0.45
 }];
 
+function modifyPrice(){
+for(var i = 0; i < rentals.length; i++){
+  rentals[i].price=0;
+var returnDate2 = new Date(rentals[i].returnDate);
+    var pickupDate2 = new Date(rentals[i].pickupDate);
+    var timeDiff = Math.abs(returnDate2.getTime() - pickupDate2.getTime());
+    var diffDays = Math.ceil(timeDiff /(1000*3600*24));
+
+var distance = cars[i].pricePerKm*rentals[i].distance;
+var time = cars[i].pricePerDay*diffDays;
+rentals[i].price = time + distance;
+}
+}
 //list of rentals
 //useful for ALL exercises
 //The `price` is updated from exercice 1
@@ -165,7 +178,8 @@ var rentalModifications = [{
   'pickupDate': '2015-12-05'
 }];
 
+modifyPrice();
 console.log(cars);
 console.log(rentals);
 console.log(actors);
-console.log(rentalModifications);
+//console.log(rentalModifications);
