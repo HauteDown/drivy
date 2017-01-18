@@ -23,28 +23,36 @@ for(var i = 0; i < rentals.length; i++){
 var returnDate2 = new Date(rentals[i].returnDate);
     var pickupDate2 = new Date(rentals[i].pickupDate);
     var timeDiff = Math.abs(returnDate2.getTime() - pickupDate2.getTime());
-    var diffDays = Math.ceil(timeDiff /(1000*3600*24)+1);
+    var diffDays = Math.ceil(timeDiff /(1000*3600*24))+1;
 
 var distance = cars[i].pricePerKm*rentals[i].distance;
 var time = cars[i].pricePerDay*diffDays;
-rentals[i].price = time + distance;
-}
+var newPrice = time + distance;
+var deductibleReduc = diffDays*4;
 
-if(diffDays>=1 && diffDays<4)
+rentals[i].price= newPrice;
+
+
+  if(diffDays>=1 && diffDays<4)
     {
-      rentals[i].price= newPrice-newPrice*0.1;
+      newPrice= newPrice-newPrice*0.1;
     }
 
   if(diffDays>=4 && diffDays<10)
     {
-      rentals[i].price= newPrice-newPrice*0.3;
+      newPrice= newPrice-newPrice*0.3;
     }
   if(diffDays>=10)
     {
-      rentals[i].price= newPrice-newPrice/2;
+      newPrice= newPrice-newPrice/2;
+    }  
+  if(rentals[i].deductibleReduction==true)
+    {
+    newPrice=newPrice - deductibleReduc;
     }
 
-    var commission=rentals[i].price*0.3;
+rentals[i].price= newPrice;
+var commission=rentals[i].price*0.3;
 var insu = commission/2;
 var assi = diffDays;
 var dri = commission- (insu+assi);
@@ -52,6 +60,42 @@ var dri = commission- (insu+assi);
 rentals[i].drivy=dri;
 rentals[i].insurance = insu;
 rentals[i].assistance=assi;
+
+  for (var j=0, l=actors[0].payment.length; j<l;j++){
+ 
+      if(actors[i].payment[j].who=="driver"){
+        actors[i].payment[j].amount=newPrice;
+      }
+
+      if(actors[i].payment[j].who=="owner"){
+        actors[i].payment[j].amount=newPrice-commission;
+      }
+
+      if(actors[i].payment[j].who=="insurance"){
+        actors[i].payment[j].amount=insu;
+      }
+
+      if(actors[i].payment[j].who=="assistance"){
+        actors[i].payment[j].amount=assi;
+      }
+
+      if(actors[i].payment[j].who=="drivy"){
+        actors[i].payment[j].amount=dri;
+      }
+                              
+    } 
+  
+  }
+     
+}
+
+
+var m =0;
+var amount = 0;
+function modifyAmount(){
+  for(var i = 0; i < actors.length; i++){
+      //actors
+    }
   }
 //list of rentals
 //useful for ALL exercises
